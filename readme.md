@@ -1,25 +1,145 @@
+personas-backend-java
+Este proyecto es un servicio RESTful desarrollado con Jakarta EE y GlassFish para la gestión de datos de personas. Actúa como una capa de backend para realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre una entidad Persona, exponiendo una API clara y sencilla para cualquier cliente.
 
-**                 Readme realizado por Jorge Herraiz Soler                   **
---------------------------------------------------------------------------------------------------------------
-|      Procedimiento para iniciar desde cero este proyecto Desktop - frontend / backend Sistemas de tareas.  |
---------------------------------------------------------------------------------------------------------------
+🚀 Tecnologías y Dependencias
+Java 21: Lenguaje de programación principal.
 
+Jakarta EE 11.0.0-M1: Conjunto de APIs para el desarrollo de aplicaciones empresariales, incluyendo JAX-RS para los servicios REST.
 
-// REQUERIMIENTOS  TECNICOS  Y  PRACTICOS
+GlassFish Server: Servidor de aplicaciones utilizado para desplegar el proyecto.
 
-1. Tener IntelliJ IDEA 2023.3.4 (Community Edition)
-   Runtime version: 17.0.10+1-b1087.17 amd64
-   VM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
-   Lombook Plugin (233.14475.39)
- 
-2. Tener instalado el Eclipse Temurin 20.0.2
+Maven: Herramienta de gestión de proyectos y dependencias.
 
-// PROCEDIMIENTO  START   PROYECT  BACKEND DE SISTEMAS DE TAREAS   
+Jersey: Implementación de referencia de JAX-RS para la creación del cliente.
 
-1. Tener instalado MySQL Workbench 8.0.42  (Community Version)
+⚙️ Estructura de la API
+La API REST se accede a través de la URL base: http://localhost:8080/personas-backend-java/webservice/personas.
 
-2. Dentro de MySQL Workbench crear Schema con el nombre tareas_db
+A continuación se detallan los endpoints disponibles y sus funcionalidades.
 
-3. Dentro de MySQL Workbench en Server > Data Import  seleccionar la carpeta que esta en Documentation que se llama importarBD_tareas y darle a importar
+➡️ 1. Obtener todas las personas
+Método: GET
 
-4. En IntelliJ IDEA dentro del archivo RhApplication darle a run()
+URL: /
+
+Descripción: Recupera una lista completa de todas las personas registradas.
+
+Ejemplo de Respuesta (JSON):
+
+[
+  {
+    "idPersona": 1,
+    "nombre": "Juan"
+  },
+  {
+    "idPersona": 2,
+    "nombre": "Maria"
+  }
+]
+
+➡️ 2. Obtener una persona por ID
+Método: GET
+
+URL: /{id}
+
+Descripción: Obtiene los detalles de una persona específica usando su ID.
+
+Ejemplo de Uso: http://localhost:8080/personas-backend-java/webservice/personas/57
+
+Ejemplo de Respuesta (JSON):
+
+{
+  "idPersona": 57,
+  "nombre": "marcos"
+}
+
+➡️ 3. Agregar una nueva persona
+Método: POST
+
+URL: /
+
+Descripción: Crea un nuevo registro de persona en la base de datos.
+
+Ejemplo de Cuerpo de Solicitud (JSON):
+
+{
+  "nombre": "Pedro"
+}
+
+Ejemplo de Respuesta (JSON):
+
+{
+  "idPersona": 58,
+  "nombre": "Pedro"
+}
+
+➡️ 4. Modificar una persona
+Método: PUT
+
+URL: /{id}
+
+Descripción: Actualiza la información de una persona existente. El ID en la URL y en el cuerpo de la solicitud deben coincidir.
+
+Ejemplo de Uso: http://localhost:8080/personas-backend-java/webservice/personas/57
+
+Ejemplo de Cuerpo de Solicitud (JSON):
+
+{
+  "idPersona": 57,
+  "nombre": "Marcos Javier"
+}
+
+➡️ 5. Eliminar una persona
+Método: DELETE
+
+URL: /{id}
+
+Descripción: Elimina un registro de persona de la base de datos.
+
+Ejemplo de Uso: http://localhost:8080/personas-backend-java/webservice/personas/57
+
+🧪 Pruebas con Postman
+Para probar los endpoints, puedes utilizar Postman. A continuación, se describen los pasos para cada operación.
+
+Abre Postman y crea una nueva solicitud.
+
+Asegúrate de que la aplicación esté desplegada en tu servidor GlassFish.
+
+GET /personas
+Método: GET
+
+URL: http://localhost:8080/personas-backend-java/webservice/personas
+
+Haz clic en Send.
+
+GET /personas/{id}
+Método: GET
+
+URL: http://localhost:8080/personas-backend-java/webservice/personas/57
+
+Haz clic en Send.
+
+POST /personas
+Método: POST
+
+URL: http://localhost:8080/personas-backend-java/webservice/personas
+
+En la pestaña Body, selecciona raw y el tipo JSON.
+
+Pega el JSON del ejemplo en el cuerpo y haz clic en Send.
+
+PUT /personas/{id}
+Método: PUT
+
+URL: http://localhost:8080/personas-backend-java/webservice/personas/57
+
+En la pestaña Body, selecciona raw y el tipo JSON.
+
+Pega el JSON con los datos actualizados y haz clic en Send.
+
+DELETE /personas/{id}
+Método: DELETE
+
+URL: http://localhost:8080/personas-backend-java/webservice/personas/57
+
+Haz clic en Send. El servicio retornará un código de éxito si la eliminación fue correcta.
